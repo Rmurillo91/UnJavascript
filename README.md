@@ -1,2 +1,2 @@
-# UnJavascript
-Some notes under Javascript
+# Under Javascript
+Some notes about Javascript
