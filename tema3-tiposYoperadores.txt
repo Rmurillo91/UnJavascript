@@ -1,0 +1,69 @@
+** tema3 - tipos y operadores
+
+
+
+
+	- javascript es un tipado dinamico, con sus ventajas y desventajas. al contrario que otros
+	lenguajes, las variables de declaran sin restringir su valor. es decir, con var podemos
+	definir booleanos, strings o numeros, por ejemplo.
+
+
+
+
+	- tipos primitivos: son los valores unicos que damos a una variable (no objeto). puede haber 
+	seis tipos: undefined (que es como define en primera instancia javascript), null (que es similar
+	a la anterior, es la que usaremos NOSOTROS para referirnos a valores que no existan), boolean (	
+	verdadero o falso), number (que engloba a todo, incluso decimales), string (cadena de texto) y
+	symbol ( ecma6).
+
+
+
+
+	- los operadores (+, -, >,...) son realmente funciones, se comportan como funciones. 3 + 4 podria
+	ser por ejemplo function +(3,4). 
+
+
+
+
+
+	- operador precedente y asociativo: precedente es la jerarquia, es decir, a que operador se llama
+	primero por orden de preferencia. asociativo es, cuando tienen la misma preferencia, si se leen
+	de izquierda a derecha o viceversa. mirar la tabla de precedencia.
+
+
+
+
+	- coercion: significa convertir un valor de un tipo a otro. javascript convierte valores a otros
+	al ser dinamico. por ejemplo: var a = 1 + '2'; el resultado sera 12, convierte 1 a string automaticamente.
+
+
+
+
+	- operadores de comparacion: se ejecuta uno por uno. por ejemplo 3<2<1 el resultado es true, porque 3<2 es
+	false (que se convierte a 0) y false(0)<1 es true.
+
+	si el resultado es NaN es que no puede ser convertido a number de ninguna forma (por eje. Number(undefined).
+	
+	los 3 === se ponen porque por ejemplo "3" == 3 da true. esto es un ejemplo de coercion mala de javascript.
+
+
+
+	- la coercion se usa en framework y librerias para casos como el siguiente: var a;
+
+	if (a) {....} en este caso, no se ejecuta al ser undefined. podemos asegurarnos poniendo: if (a || a === 0) {...}
+
+
+
+
+	- puedes darle un valor por defecto a una variable aplicando el operador || . por ejemplo:
+
+	name = name || "Introduce nombre"; si aun no se a definido name mostrara el segundo mensaje. este operador 
+	SIEMPRE coge el primero de los dos que es distinto a false. 
+
+
+
+	- un ejemplo de esto en frameworks: se utiliza para que no colisionen valores de variables al cargarse las 
+	librerias. por ejemplo: window.libro = window.libro || "El principito"; checkeara primero si existe esa 
+	variable ya definida (en otra libreria cargada antes, por eje.) y si no la creara con el nombre "El principito".
+
+	
