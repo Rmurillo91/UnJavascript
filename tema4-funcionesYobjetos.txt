@@ -1,0 +1,157 @@
+** tema 4 - funciones y objetos
+
+
+
+	- recordamos que un objeto puede contener valores primitivos (lo normal), otros objetos (child)
+	incluso funciones dentro de los mismos, y cada valor representa un espacio individual en la
+	memoria.
+
+	para crear manualmente un objeto, o objeto de un objeto, usamos new Object(). ejemplo:
+	var persona = new Object();   o   var persona.estudios = new Object();
+
+
+	luego podemos añadir con [] o puntos. ejemplo:
+	persona["Nombre"] = "Manuel"    o    persona.estudios.colegio = "Tio Jorge";
+
+
+
+
+
+	- object literal: la mejor manera para crear objetos:  var object = {}; (se pueden introducir cosas
+	tambien). 
+
+	los objetos se pueden crear sobre la marcha. si tenemos una funcion saludar, que coge el firstname
+	de un objeto no tiene porque esta hecho. podemos meter: saludar({firstname : "Manuel"}) y nos lo
+	cogera tambien.
+
+
+
+	- frameworks, faking namespaces: en javascript no hay namespaces por defecto. son contenedores de 
+	variables y funciones. se usan para evitar colisiones de variables en distintas librerias con el 
+	mismo nombre. para evitar por ejemplo la colision de saludo en distintos idiomas, creamos objetos:
+
+	var ingles = {saludo:"hello"};   var español = {saludo:"hola"};  asi evitamos duplicidades
+
+
+
+
+	- JSON y notacion de objetos: se parece a al object literal, pero con alguna diferencia. es similar a la construccion
+	de objetos, pero las propiedades (y las {}) tienen que esta entrecomilladas.
+
+	para "traducir" javascript a JSON usamos:  JSON.stringify(objeto)
+
+	para "traducir" JSON a javascript usamos: JSON.parse('{ "nombre":"raul"}');
+
+
+
+
+	- funciones de primera clase: las funciones en javascript son OBJETOS. se les pude asignar dentro variables, objetos y
+	otras funciones. es un objeto con propiedades y metodos. hay que pensar en las funciones como objetos que tienen propie
+	dades dentro de su codigo. 
+
+	a las funciones se les pueden añadir propiedades igual que a una objeto, e invocarlas de la misma manera. ejemplo:
+
+	function prueba(){};    prueba.estado = "activo";   y se invoca sin ():    prueba.estado;
+
+
+
+
+
+	- expression: cuando da un valor (= 3, "Maria",...) , statement: cuando no devuelve valor, sino por eje. una funcion (alert(),...)
+
+	en este caso hace un analisis de las dos formas de crear funciones. la de siempre: function prueba() {} ocupara en memoria
+	con su nombre prueba y su codigo. 
+
+	sin embargo, si la creamos como variable: var prueba = function(){}; en memoria se guarda como nombre anonima y su codigo.
+	esto es lo que se llama una funcion anonima. mirar ejemplo de como pasar una funcion como parametro de otra funcion.
+
+
+
+
+	- value vs reference: cuando definimos una variable (var a = 3) y luego creamos otra igualandola (b = a) se crean DOS espacios
+	en memoria diferentes. si se modifica uno, el otro sigue teniendo el mismo valor. esto se llama value.
+
+	por el contrario, en el caso de objetos o funciones, si repetimos la operacion, solo se creara un espacio en memoria, ambos
+	objetos/funciones apuntaran al MISMO espacio.salvo que crees por ejemplo a = {}; en ese caso crea un nuevo espacio individual.
+
+
+
+
+	- this : siempre apunta al global object, salvo en una PRIMERA funcion de un objeto, que apuntara al propio objeto. sin embargo, si
+	dentro de esa funcion hay otra subfuncion apuntara al global de nuevo. 
+
+	para esto, se declara var self = this; al principio y todo se referencia como self.name para que todas las funciones del objeto 
+	referencien al propio objeto. Esto se simplifica en ECMA6 con la variable LET.
+
+
+
+
+	- arrays: pueden contener cualquier cosa: numeros, strings, booleans, arrays, funciones, objetos... un ejemplo de invocacion de una
+	funcion tomando una variable de un objeto seria la siguiente:   array[3]([array[2].name);  en este caso, en 3 tenemos una funcion
+	saludar (con entrada del nombre que queramos) y ese nombre lo buscamos en la posicion 2 y .name al ser un objeto.
+
+
+
+
+	- arguments y spread: el motor javascript los crea automaticamente con el global execution. argumentos son todos los parametros que 
+	le pasas a una funcion. ejemplo:  function saludar(parametro1,parametro2) {};  si no los definimos, ejecutara como undefined.
+
+	en version antigua, podias poner lo de parametro1 = parametro 1 || "spa"; para evitar undefined. actualmente, se puede igualar en
+	la funcion:  function saludar(parametro1 = "spa",parametro2) {}; con el mismo resultado.
+
+	arguments devuelve una especie de array con los valores de los parametros. se puede jugar: arguments.lenght;  arguments[1]; ...
+
+	tambien existe el spread, o propagacion. se pone al final de la funcion y permite introducir nuevos parametros sobre la marcha
+	function saludar(param1,param2,...other){};
+
+
+
+
+	- en javascript no existen las funciones overloading. sin embargo hay patrones que las pueden imitar. por asi decirlo, es simplificar
+	una funcion llamando a otra y metiendole un parametro. por ejemplo, tenemos function saludar(nombre,apellidos,lang) {};
+
+
+	podemos crear otra que sea asi:  function saludarESP(nombre,apellidos) {saludar(nombre, apellidos,"Español");} ; basicamente sirve
+	para definir un parametro dentro de otra funcion, simplificando y abstrayendo. 
+
+
+
+	
+	- syntax parser, es el que traduce tu codigo a maquina. en javascript hemos visto que iba paso a paso, incluso va caracter a caracter,
+	haciendo prediciones de lo que hacemos.
+
+
+
+
+	- el ; es muy importante. el syntax parser por defecto puede establecer ; , pero si no lo especificamos habra ocasiones que pueda
+	llegar a producir errores. por eso hay que tener en cuenta sobretodo con los espacios y los saltos de linea (enter).
+
+
+
+
+	- whitespaces: parecido a lo anterior, el syntax parser es bastante liberal y acepta sin problema espacios en blanco, siempre que
+	se cumplan las cosas antes citadas. se usa para poner comentarios.
+
+
+
+
+
+	- inmmediatly invoked function expressions (IIFE): funciones expression (las que defininmos como variable), por eje. var saludar = func...;
+	se pueden invocar inmediatamente solo añadiendo }(); despues del corchete ultimo de la funcion. y se ejecutan nada mas definirse. dentro
+	se le pueden pasar parametros:  }("raul"); en ese caso se invocar directamente con saludar; y no con saludar(); ya que daria error;
+
+	se pueden crear funciones sin nombre e invocables. ejemplo:
+
+
+	(function(param1) {}()); entre parentesis, y se invocara automaticamente.
+
+
+
+
+	- 
+
+	
+
+	
+
+	
