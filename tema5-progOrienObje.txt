@@ -1,0 +1,30 @@
+** tema 5 - programacion orientada objetos
+
+
+
+
+	- inheritance, o herencia, cuando un objeto accede a las propiedades y metodos de otro objeto. mientras lenguajes como
+	java tiene su forma clasica, la herencia de javascript es prototipada. PROTOTYPE.
+
+
+
+	- cada objeto puede tener su prototipo, que basicamente crea como un enlace que a la hora de llamar al objeto, si la 
+	propiedad no esta en el objeto raiz, ira a a buscar al objeto prototipo. este prototipo puede tener otro prototipo, 
+	formando la prototype chain.
+
+	basicamente, el objeto2 que prototipa a objeto1 recibe los parametros que le diferencian adquiriendo su valor, aunque
+	los que coinciden seguira teniendo el mismo valor. es decir, digamos que en objeto2 es como si se construyese un objeto
+	con todos los parametros de los dos objetos, prevaleciendo el valor de objeto2 en los que estan repetidos, y "creando"
+	los parametros unicos de objeto1 con el valor de objeto1. Primero evalua si existe en objeto2, y luego salta a 1.
+
+
+
+
+
+	- todos los prototipos, en su base, son objetos.
+
+
+
+
+	- reflection and extend. el hasOwnProperty se utiliza normalmente para fijar que solo coja las propiedades propias
+	de un objeto y no las prototipadas. mirar los ejemplos.
