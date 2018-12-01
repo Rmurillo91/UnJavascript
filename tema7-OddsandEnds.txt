@@ -1,0 +1,28 @@
+** tema 7  -  odds and ends
+
+
+	- unspected token normalmente es cuando ponemos mal un comparador o nos dejamos ",", ";", "{}" o similares.
+
+	
+
+
+	- typeof: se utiliza para saber que tipo de variable es (numero, string, objeto,...). en arrays deberemos de hacer lo siguiente:
+
+	Object.prototype.toString.call(array);  ya que si hacemos typeof array; nos saldra como objeto. 
+
+	
+	instanceof nos permite saber si ese objeto tiene al otro objeto en su prototype chain. por eje:  persona1 instanceof persona;
+	siendo persona su constructor, daria true ya que se encuentra en su prototype chain. 
+
+	typeof null; da como objeto
+
+	
+	TODO esto funciona con VARIABLES.
+
+
+
+	
+	- se puede configurar para que javascript esta en modo ESTRICTO. esto permite, por ejemplo, que creemos o asignemos valores
+	a variables que no existen por un error tipografico.
+
+	para ello, ponemos al principio del documento o al principio de una funcion:  "use strict";

@@ -1,0 +1,99 @@
+** tema 6 - building objects
+
+
+
+	- usar una funcion como constructor de objetos. es la manera mas clasica. se define una funcion:  function Person() {}; y esto
+	crea OBJETOS, es decir, si ponemos this.firstname = ""; y creamos el objeto: var persona1 = new Person(); tomara como parametro
+	de objeto, ese this no apunta al global object, ya que funciona como primera funcion de un objeto y ahi this es local.
+	 solo apunta al global object si ejecutamos la propia funcion.
+
+	podemos hacer un constructor con:    function Person(nombre,apellidos) { this.firstname = nombre;  this.lastname = apellidos;};
+
+	y luego creamos los objetos:         var persona1 = new Person("Raul","Murillo");  y crea un objeto con firstname = "Raul";
+
+
+
+
+
+	- constructor de funciones y PROTOtype: cuando creas un objeto a traves de una funcion crea el prototipo apuntando a esa funcion
+	de manera automatica. por lo tanto se puede AÑADIR de la siguiente manera:  Person.prototype.getFullName = function(){};  
+
+	en ese caso, todos los objetos creados a partir de la funcion Person (y que estan en la prototype chain) podran usar esa propiedad/
+	funcion.    persona1.getFullname();
+
+	BASICAMENTE: la funcion constructor se emplea para definir propiedades simples. y con el prototype se utiliza para añadir los 
+	metodos de funciones (como lo de getFullName()) para no ocupar tanta memoria.
+
+
+
+
+	- para acordarse de poner "new", se utiliza la primera letra mayuscula (Person, por eje.) en el nombre de los constructores de funciones
+
+
+
+
+	- built-in function constructors: son constructores como Number() o String(). estos No crean primitivos, sino OBJETOS que almacenan
+	valores primitivos y que añaden una serie de metodos asociados al prototipo Number() o String().
+
+	se pueden añadir funciones al prototipo original. por ejemplo:   String.prototype.esMayorque = function(limite) { return this.lenght > limit;};
+
+	si le pasamos un string:   "John".esMayorque(3); nos devolvera true. 
+
+	en numbers solo funciona si es construido con Number();   no obstante los built-in propios estan DESACONSEJADOS salvo fuerza mayor.
+
+
+
+
+	- built-in PELIGRO: estas pueden causar problemas a la hora de intentar usarlos con comparadores o en la coercion. para ello se aconseja
+	utilizar los literals u objetos primitivos en vez de constructores. para fechas, la libreria momentJS soluciona problemas que puedan
+	haber relacionados.
+
+
+
+
+	- en javascript los arrays son objetos tambien. el 0,1,2... en realidad no indican la posicion sino que el motor crea propiedades con
+	ese nombre: 0,1,2...
+
+
+	por ello, en bucles for/in con arrays no son recomendados si usamos built-in functions, es mejor lo de toda la vida (i=0;i...;i++);
+
+
+
+	
+
+	- object.create y pure prototypal inheritance: es la manera mas adecuada para javascript. es practicamente igual que la logica basica.
+
+	se crea un objecto "creador" :   var person = {firstname : "Default", lastname: "Default"};
+
+	y se crea asi:  var persona1 = Object.create(person);
+
+	y se le añade como siempre:  persona1.firstname = "Raul";
+
+
+	
+	sin embargo, en los navegadores antiguos quizas no disponen de object. para ello se crea los polyfill, que es codigo que se añade a una
+	caracteristica la cual puede que el navegador no disponga. mirar el ejemplo
+
+
+
+
+
+
+	- ES6 y las clases: se utiliza una sintaxis similar al de las funciones constructoras, y el prototype se establece con class/extend. 
+	mirar los ejemplos tipicos.    
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
